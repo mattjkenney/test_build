@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block title %}Test Builder Tests{% endblock %}
+{% block heading %}Manage Test List{% endblock %}
+
+{% block body %}
+<p>
+    <h2>Add Tests</h2>
+    <form onSubmit= location.reload() method="post" name= "add">
+        {% csrf_token %}
+        {% for form in testForm %}
+            {{ form.label_tag }}<br>
+            {{ form }}<br>
+        {% endfor %}
+        <input type= "submit" value= "Add Test"><br><br>
+    </form>
+    <select size= {{ tests_qty }} name= "to_remove">
+        {% for t in tests_current %}
+        <option value= {{ t.test }}>{{ t.test }}</option>
+        {% endfor %}
+    </select>
+    <form onSubmit= location.reload() method= "post" name= "remove">
+        <input type= "hidden" value= removeFromList()>
+        <input type= "submit" value= "Remove Test"><br>
+    </form>
+</p>
+{% endblock %}
